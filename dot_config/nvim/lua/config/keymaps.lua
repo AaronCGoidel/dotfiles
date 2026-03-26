@@ -42,5 +42,4 @@ map("n", "<leader>w", ":w<CR>", { desc = "Save file" })
 -- Quit
 map("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
--- File explorer
-map("n", "<leader>e", ":Explore<CR>", { desc = "File explorer" })
+-- File explorer (mapped in plugins/mini-files.lua)
