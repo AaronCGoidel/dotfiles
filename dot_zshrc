@@ -99,11 +99,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 # ---------------------------------------------------------------------------
-# Zoxide (smart cd)
-# ---------------------------------------------------------------------------
-eval "$(zoxide init zsh --cmd cd)"
-
-# ---------------------------------------------------------------------------
 # fzf
 # ---------------------------------------------------------------------------
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
@@ -127,3 +122,6 @@ export FZF_DEFAULT_OPTS=" \
 # Starship prompt (must be last)
 # ---------------------------------------------------------------------------
 eval "$(starship init zsh)"
+
+# Zoxide must init last (after starship)
+eval "$(zoxide init zsh --cmd cd)"
