@@ -1,0 +1,38 @@
+# Files chezmoi should never manage
+# (these exist on the machine but must NOT be tracked)
+
+# SSH private keys
+.ssh/id_*
+.ssh/*.pem
+.ssh/*.key
+.ssh/known_hosts
+.ssh/authorized_keys
+.ssh/agent.*
+
+# GPG
+.gnupg/**
+
+# Secrets and credentials
+.env
+.env.*
+.netrc
+.npmrc
+.pypirc
+.aws/**
+.docker/config.json
+
+# macOS system
+.DS_Store
+.Trash/**
+.CFUserTextEncoding
+Library/**
+
+# Application state (not config)
+.local/share/**
+.cache/**
+
+# GitHub CLI tokens (contains OAuth tokens)
+.config/gh/hosts.yml
+
+# Claude settings (may contain keys)
+.claude/settings.local.json

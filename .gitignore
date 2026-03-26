@@ -1,0 +1,49 @@
+# === SECRETS - NEVER COMMIT ===
+# Private keys
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+id_ecdsa
+id_dsa
+*.privkey
+
+# Environment and secret files
+.env
+.env.*
+*.secret
+*.secrets
+*.token
+*.tokens
+credentials
+credentials.*
+
+# API keys and auth tokens
+.netrc
+.npmrc
+.pypirc
+
+# macOS keychain
+*.keychain
+*.keychain-db
+
+# GPG
+*.gpg
+*.asc
+secring.*
+trustdb.*
+
+# SSH agent / auth sockets
+agent.*
+auth_sock
+
+# Cloud credentials
+.aws/credentials
+.gcloud/
+.azure/
+
+# Chezmoi key (used for encryption)
+key.txt
+chezmoi-key.*

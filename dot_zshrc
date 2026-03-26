@@ -1,0 +1,129 @@
+# =============================================================================
+# ZSH Configuration — Aaron Goidel
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# PATH
+# ---------------------------------------------------------------------------
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/opt/homebrew/opt/llvm/bin:$PATH"
+
+# ---------------------------------------------------------------------------
+# Zinit — plugin manager (auto-install)
+# ---------------------------------------------------------------------------
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [[ ! -d "$ZINIT_HOME" ]]; then
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"
+
+# ---------------------------------------------------------------------------
+# Plugins (turbo-loaded for speed)
+# ---------------------------------------------------------------------------
+zinit light-mode for \
+    zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-completions \
+    jeffreytse/zsh-vi-mode
+
+# Syntax highlighting must load last
+zinit light zsh-users/zsh-syntax-highlighting
+
+# ---------------------------------------------------------------------------
+# Completion system
+# ---------------------------------------------------------------------------
+autoload -Uz compinit
+compinit -C
+zinit cdreplay -q
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Colors in completion menu
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# ---------------------------------------------------------------------------
+# Shell options
+# ---------------------------------------------------------------------------
+setopt AUTO_CD              # cd by typing directory name
+setopt AUTO_PUSHD           # push directories on every cd
+setopt PUSHD_IGNORE_DUPS    # no duplicates in dir stack
+setopt HIST_IGNORE_ALL_DUPS # no duplicate history entries
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY        # share history between sessions
+setopt EXTENDED_GLOB
+
+# History
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE="${HOME}/.zsh_history"
+
+# ---------------------------------------------------------------------------
+# Vi mode (zsh-vi-mode config)
+# ---------------------------------------------------------------------------
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+
+# Restore fzf bindings after zsh-vi-mode takes over
+function zvm_after_init() {
+    source <(fzf --zsh)
+}
+
+# ---------------------------------------------------------------------------
+# Modern CLI replacements
+# ---------------------------------------------------------------------------
+# eza → ls
+alias ls="eza --icons --group-directories-first"
+alias ll="eza -l --icons --group-directories-first --git"
+alias la="eza -la --icons --group-directories-first --git"
+alias tree="eza --tree --icons"
+
+# bat → cat
+alias cat="bat --paging=never"
+export BAT_THEME="Catppuccin Mocha"
+
+# delta (configured via gitconfig)
+export DELTA_PAGER="less -R"
+
+# ---------------------------------------------------------------------------
+# Handy aliases
+# ---------------------------------------------------------------------------
+alias vim="nvim"
+alias v="nvim"
+alias g="git"
+alias gc="git commit"
+alias gs="git status"
+alias gd="git diff"
+alias gl="git log --oneline --graph --decorate -20"
+alias gp="git push"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# ---------------------------------------------------------------------------
+# Zoxide (smart cd)
+# ---------------------------------------------------------------------------
+eval "$(zoxide init zsh --cmd cd)"
+
+# ---------------------------------------------------------------------------
+# fzf
+# ---------------------------------------------------------------------------
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
+
+# Catppuccin Mocha colors for fzf
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
+
+# ---------------------------------------------------------------------------
+# Bun completions (if installed)
+# ---------------------------------------------------------------------------
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# ---------------------------------------------------------------------------
+# Starship prompt (must be last)
+# ---------------------------------------------------------------------------
+eval "$(starship init zsh)"
