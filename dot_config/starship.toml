@@ -3,6 +3,7 @@
 palette = "catppuccin_mocha"
 
 format = """
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -80,6 +81,11 @@ style = "blue"
 symbol = ""
 format = " [$symbol]($style)"
 style = "teal"
+
+[hostname]
+ssh_only = true
+style = "bold pink"
+format = "[$hostname]($style) "
 
 # --- Disabled ---
 [package]
