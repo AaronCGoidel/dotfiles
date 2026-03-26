@@ -43,7 +43,9 @@ brew "ffmpeg"
 brew "pkgconf"
 
 # --- Casks ---
-cask "anaconda"
 cask "bruno"
 cask "font-jetbrains-mono-nerd-font"
-cask "mactex"
+
+# --- Heavy casks (install manually: brew install --cask <name>) ---
+# cask "anaconda"
+# cask "mactex"
