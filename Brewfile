@@ -36,7 +36,7 @@ brew "docker"
 brew "nats-server"
 brew "nginx"
 brew "tailscale"
-brew "mongodb/brew/mongodb-community@6.0"
+brew "mongodb/brew/mongodb-community@8.0"
 
 # --- Build Tools ---
 brew "ffmpeg"
