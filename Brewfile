@@ -1,6 +1,6 @@
 # =============================================================================
 # Brewfile — managed by chezmoi
-# Run: brew bundle --file=~/.local/share/chezmoi/Brewfile
+# Run: brew bundle --file=~/Brewfile
 # =============================================================================
 
 # --- Taps ---
@@ -20,7 +20,6 @@ brew "neovim"
 brew "ripgrep"
 brew "starship"
 brew "tmux"
-brew "tree"
 brew "zoxide"
 
 # --- Languages & Runtimes ---
